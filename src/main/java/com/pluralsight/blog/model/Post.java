@@ -1,26 +1,40 @@
 package com.pluralsight.blog.model;
 
-import org.hibernate.annotations.CreationTimestamp;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.lang.reflect.Method;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class Post {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Version
+    private Long version;
+
+    @NotNull @Size(min = 4, max = 100)
     private String title;
-    @Column(length=1000000)
+
+    @Column(length = 1000000)
     @Lob
     private String body;
+
     @Temporal(TemporalType.DATE)
     @CreationTimestamp
     private Date date;
