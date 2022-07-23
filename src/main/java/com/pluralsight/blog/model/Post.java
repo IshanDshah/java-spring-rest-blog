@@ -25,11 +25,21 @@ public class Post {
     @CreationTimestamp
     private Date date;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Author author;
+
     public Post() {
         super();
     }
 
-    public Post(String title, String body){//, Author author) {
+    public Post(String title, String body, Author author) {
+        this();
+        this.title = title;
+        this.body = body;
+        this.author=author;
+    }
+
+    public Post(String title, String body) {
         this();
         this.title = title;
         this.body = body;
@@ -79,5 +89,13 @@ public class Post {
         Post otherPost = (Post)obj;
         return this.title.equals(otherPost.getTitle()) &&
                this.body.equals(otherPost.getBody());
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 }

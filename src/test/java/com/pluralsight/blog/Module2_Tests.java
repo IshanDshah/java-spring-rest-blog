@@ -246,7 +246,7 @@ public class Module2_Tests {
 
             String title = String.format(template, gadget);
             Post post = new Post(title, "Lorem ipsum dolor sit amet, consectetur adipiscing elit… ");
-            // post.setAuthor(author);
+             post.setAuthor(author);
             try {
                 Method method = Post.class.getMethod("setAuthor", Author.class);
                 method.invoke(post, author);
